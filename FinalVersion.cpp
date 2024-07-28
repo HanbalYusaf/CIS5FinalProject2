@@ -23,8 +23,11 @@ struct Card {
 int getCardValue(Card card, int currentScore);
 void displayResults(int playerScore, int dealerScore, int &playerWins, int &dealerWins, ofstream &outfile);
 void logGameDetails(ofstream &outfile, Card playerHand1, Card playerHand2, Card dealerHand1, Card dealerHand2, int playerScore, int dealerScore, int playerWins, int dealerWins);
-void logFinalResults(ofstream &outfile, int playerWins, int dealerWins);
 void displayWelcomeMessage();
+void displayGameOverMessage();
+void displayPlayerWinsBackground(int playerWins, int dealerWins);
+void displayDealerWinsBackground(int playerWins, int dealerWins);
+void logFinalResults(ofstream &outfile, int playerWins, int dealerWins);
 char getValidInput(string prompt);
 
 const char SUITS[] = {'H', 'D', 'C', 'S'};
@@ -131,6 +134,13 @@ int main() {
     // Close the output file
     outfile.close();
 
+    // Display the game over message
+    displayGameOverMessage();
+
+    // Display player and dealer wins background messages
+    displayPlayerWinsBackground(playerWins, dealerWins);
+    displayDealerWinsBackground(playerWins, dealerWins);
+
     // Calculate and display average wins
     float playerAvgWins = static_cast<float>(playerWins) / totalGames;
     float dealerAvgWins = static_cast<float>(dealerWins) / totalGames;
@@ -139,11 +149,13 @@ int main() {
     cout << "Player wins: " << playerWins << " (Average wins: " << playerAvgWins << ")" << endl;
     cout << "Dealer wins: " << dealerWins << " (Average wins: " << dealerAvgWins << ")" << endl;
 
-    // Calculate and display sine, cosine, and tangent of wins
+    // Calculate and display square root, sine, cosine, and tangent of wins
+    cout << "Player wins sqrt: " << sqrt(static_cast<float>(playerWins)) << endl;
     cout << "Player wins sin: " << sin(static_cast<float>(playerWins)) << endl;
     cout << "Player wins cos: " << cos(static_cast<float>(playerWins)) << endl;
     cout << "Player wins tan: " << tan(static_cast<float>(playerWins)) << endl;
 
+    cout << "Dealer wins sqrt: " << sqrt(static_cast<float>(dealerWins)) << endl;
     cout << "Dealer wins sin: " << sin(static_cast<float>(dealerWins)) << endl;
     cout << "Dealer wins cos: " << cos(static_cast<float>(dealerWins)) << endl;
     cout << "Dealer wins tan: " << tan(static_cast<float>(dealerWins)) << endl;
@@ -195,9 +207,11 @@ void logGameDetails(ofstream &outfile, Card playerHand1, Card playerHand2, Card 
     outfile << " (Score: " << fixed << setprecision(2) << playerScore << ")" << endl;
     outfile << "Dealer's hand: " << RANKS[dealerHand1.rank - 1] << dealerHand1.suit << " " << RANKS[dealerHand2.rank - 1] << dealerHand2.suit;
     outfile << " (Score: " << fixed << setprecision(2) << dealerScore << ")" << endl;
+    outfile << "Player wins sqrt: " << sqrt(static_cast<float>(playerWins)) << endl;
     outfile << "Player wins sin: " << sin(static_cast<float>(playerWins)) << endl;
     outfile << "Player wins cos: " << cos(static_cast<float>(playerWins)) << endl;
     outfile << "Player wins tan: " << tan(static_cast<float>(playerWins)) << endl;
+    outfile << "Dealer wins sqrt: " << sqrt(static_cast<float>(dealerWins)) << endl;
     outfile << "Dealer wins sin: " << sin(static_cast<float>(dealerWins)) << endl;
     outfile << "Dealer wins cos: " << cos(static_cast<float>(dealerWins)) << endl;
     outfile << "Dealer wins tan: " << tan(static_cast<float>(dealerWins)) << endl;
@@ -214,12 +228,6 @@ void logFinalResults(ofstream &outfile, int playerWins, int dealerWins) {
     } else {
         outfile << "BOTH HAVE AN EQUAL AMOUNT OF WINS" << endl;
     }
-    outfile << "Player wins sin: " << sin(static_cast<float>(playerWins)) << endl;
-    outfile << "Player wins cos: " << cos(static_cast<float>(playerWins)) << endl;
-    outfile << "Player wins tan: " << tan(static_cast<float>(playerWins)) << endl;
-    outfile << "Dealer wins sin: " << sin(static_cast<float>(dealerWins)) << endl;
-    outfile << "Dealer wins cos: " << cos(static_cast<float>(dealerWins)) << endl;
-    outfile << "Dealer wins tan: " << tan(static_cast<float>(dealerWins)) << endl;
 }
 
 // Function to display welcome message
@@ -227,6 +235,47 @@ void displayWelcomeMessage() {
     cout << "=====================================" << endl;
     cout << "WELCOME TO BLACKJACK 9000" << endl;
     cout << "=====================================" << endl;
+}
+
+// Function to display game over message
+void displayGameOverMessage() {
+    cout << "=====================================" << endl;
+    cout << "Thank you for playing Blackjack 9000" << endl;
+    cout << "=====================================" << endl;
+}
+
+// Function to display player wins background message
+void displayPlayerWinsBackground(int playerWins, int dealerWins) {
+    if (playerWins > dealerWins) {
+        cout << "=====================================" << endl;
+        cout << "Player has more wins" << endl;
+        cout << "=====================================" << endl;
+    } else if (playerWins < dealerWins) {
+        cout << "=====================================" << endl;
+        cout << "Dealer has more wins" << endl;
+        cout << "=====================================" << endl;
+    } else {
+        cout << "=====================================" << endl;
+        cout << "Both have an equal amount of wins" << endl;
+        cout << "=====================================" << endl;
+    }
+}
+
+// Function to display dealer wins background message
+void displayDealerWinsBackground(int playerWins, int dealerWins) {
+    if (dealerWins > playerWins) {
+        cout << "=====================================" << endl;
+        cout << "Dealer has more wins" << endl;
+        cout << "=====================================" << endl;
+    } else if (dealerWins < playerWins) {
+        cout << "=====================================" << endl;
+        cout << "Player has more wins" << endl;
+        cout << "=====================================" << endl;
+    } else {
+        cout << "=====================================" << endl;
+        cout << "Both have an equal amount of wins" << endl;
+        cout << "=====================================" << endl;
+    }
 }
 
 // Function to get valid input
