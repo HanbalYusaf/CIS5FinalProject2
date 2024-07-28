@@ -7,7 +7,7 @@
 using namespace std;
 
 /*
- File: Project2FinalVersion
+ File: Project2Final
  Name: Hanbal Yusuf
  Created: 7/27/2024
  Purpose: Blackjack Game
