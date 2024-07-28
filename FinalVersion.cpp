@@ -24,12 +24,16 @@ int getCardValue(Card card, int currentScore);
 void displayResults(int playerScore, int dealerScore, int &playerWins, int &dealerWins, ofstream &outfile);
 void logGameDetails(ofstream &outfile, Card playerHand1, Card playerHand2, Card dealerHand1, Card dealerHand2, int playerScore, int dealerScore, int playerWins, int dealerWins);
 void logFinalResults(ofstream &outfile, int playerWins, int dealerWins);
+void displayWelcomeMessage();
 char getValidInput(string prompt);
 
 const char SUITS[] = {'H', 'D', 'C', 'S'};
 const char RANKS[] = {'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'};
 
 int main() {
+    // Display the welcome message
+    displayWelcomeMessage();
+
     // Initialize random seed
     srand(static_cast<unsigned>(time(0)));
 
@@ -135,11 +139,14 @@ int main() {
     cout << "Player wins: " << playerWins << " (Average wins: " << playerAvgWins << ")" << endl;
     cout << "Dealer wins: " << dealerWins << " (Average wins: " << dealerAvgWins << ")" << endl;
 
-    // Calculate and display sine and cosine of wins
+    // Calculate and display sine, cosine, and tangent of wins
     cout << "Player wins sin: " << sin(static_cast<float>(playerWins)) << endl;
     cout << "Player wins cos: " << cos(static_cast<float>(playerWins)) << endl;
+    cout << "Player wins tan: " << tan(static_cast<float>(playerWins)) << endl;
+
     cout << "Dealer wins sin: " << sin(static_cast<float>(dealerWins)) << endl;
     cout << "Dealer wins cos: " << cos(static_cast<float>(dealerWins)) << endl;
+    cout << "Dealer wins tan: " << tan(static_cast<float>(dealerWins)) << endl;
 
     // Example of cmath usage
     cout << "Absolute value of player's final score: " << abs(finalPlayerScore) << endl;
@@ -190,8 +197,10 @@ void logGameDetails(ofstream &outfile, Card playerHand1, Card playerHand2, Card 
     outfile << " (Score: " << fixed << setprecision(2) << dealerScore << ")" << endl;
     outfile << "Player wins sin: " << sin(static_cast<float>(playerWins)) << endl;
     outfile << "Player wins cos: " << cos(static_cast<float>(playerWins)) << endl;
+    outfile << "Player wins tan: " << tan(static_cast<float>(playerWins)) << endl;
     outfile << "Dealer wins sin: " << sin(static_cast<float>(dealerWins)) << endl;
     outfile << "Dealer wins cos: " << cos(static_cast<float>(dealerWins)) << endl;
+    outfile << "Dealer wins tan: " << tan(static_cast<float>(dealerWins)) << endl;
     outfile << "Total player wins: " << playerWins << endl;
     outfile << "Total dealer wins: " << dealerWins << endl;
 }
@@ -207,8 +216,17 @@ void logFinalResults(ofstream &outfile, int playerWins, int dealerWins) {
     }
     outfile << "Player wins sin: " << sin(static_cast<float>(playerWins)) << endl;
     outfile << "Player wins cos: " << cos(static_cast<float>(playerWins)) << endl;
+    outfile << "Player wins tan: " << tan(static_cast<float>(playerWins)) << endl;
     outfile << "Dealer wins sin: " << sin(static_cast<float>(dealerWins)) << endl;
     outfile << "Dealer wins cos: " << cos(static_cast<float>(dealerWins)) << endl;
+    outfile << "Dealer wins tan: " << tan(static_cast<float>(dealerWins)) << endl;
+}
+
+// Function to display welcome message
+void displayWelcomeMessage() {
+    cout << "=====================================" << endl;
+    cout << "WELCOME TO BLACKJACK 9000" << endl;
+    cout << "=====================================" << endl;
 }
 
 // Function to get valid input
