@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
     // Game counters
     int playerWins = 0;
     int dealerWins = 0;
-    int totalGames = 0;
+    static int totalGames = 0; // Static variable to keep track of total games played
 
     // Variable to store final player score for example of cmath usage
     int finalPlayerScore = 0;
@@ -75,9 +75,14 @@ int main(int argc, char *argv[]) {
         playerScore = getCardValue(playerHand1, 0) + getCardValue(playerHand2, 0);
         dealerScore = getCardValue(dealerHand1, 0) + getCardValue(dealerHand2, 0);
 
-        // Display initial hands
-        cout << "Player's hand: " << RANKS[playerHand1.rank - 1] << playerHand1.suit << " " << RANKS[playerHand2.rank - 1] << playerHand2.suit;
-        cout << " (Score: " << fixed << setprecision(2) << playerScore << ")" << endl;
+        // Display initial hands using for loop
+        cout << "Player's hand: ";
+        Card playerHand[] = {playerHand1, playerHand2};
+        for (int i = 0; i < 2; i++) {
+            cout << RANKS[playerHand[i].rank - 1] << playerHand[i].suit << " ";
+        }
+        cout << "(Score: " << fixed << setprecision(2) << playerScore << ")" << endl;
+
         cout << "Dealer's hand: " << RANKS[dealerHand1.rank - 1] << dealerHand1.suit << " ??" << endl;
 
         // Player's turn
@@ -166,6 +171,10 @@ int main(int argc, char *argv[]) {
 
 // Function to get the value of a card
 int getCardValue(Card card, int currentScore) {
+    static int callCount = 0; // Static variable to count the number of times this function is called
+    callCount++;
+    cout << "getCardValue called " << callCount << " times." << endl;
+
     if (card.rank > 10) {
         return 10;
     } else if (card.rank == 1) {
