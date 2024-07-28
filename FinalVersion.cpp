@@ -8,7 +8,7 @@ using namespace std;
 
 /*
  File: Project2FinalVersion
- Name: Hanbal Yusuf
+ Name: Abdurrehman Hanbal Yusuf
  Created: 7/27/2024
  Purpose: Blackjack Game
  */
@@ -29,11 +29,13 @@ void displayPlayerWinsBackground(int playerWins, int dealerWins);
 void displayDealerWinsBackground(int playerWins, int dealerWins);
 void logFinalResults(ofstream &outfile, int playerWins, int dealerWins);
 char getValidInput(string prompt);
+bool playAnotherRound();
+void exitGame();
 
 const char SUITS[] = {'H', 'D', 'C', 'S'};
 const char RANKS[] = {'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'};
 
-int main() {
+int main(int argc, char *argv[]) {
     // Display the welcome message
     displayWelcomeMessage();
 
@@ -52,7 +54,6 @@ int main() {
     ofstream outfile("blackjack_result.txt"); // Open in write mode to overwrite file
 
     // Play multiple rounds
-    char playAgain;
     do {
         // Initialize player and dealer hands and scores
         Card playerHand1, playerHand2, dealerHand1, dealerHand2, newCard;
@@ -123,10 +124,7 @@ int main() {
 
         // Update final player score for example of cmath usage
         finalPlayerScore = playerScore;
-
-        // Ask if the player wants to play again
-        playAgain = getValidInput("Do you want to play again? (y/n): ");
-    } while (playAgain == 'y');
+    } while (playAnotherRound());
 
     // Log the final results
     logFinalResults(outfile, playerWins, dealerWins);
@@ -292,4 +290,16 @@ char getValidInput(string prompt) {
         }
     }
     return input;
+}
+
+// Function to ask if the player wants to play another round
+bool playAnotherRound() {
+    char input = getValidInput("Do you want to play again? (y/n): ");
+    return input == 'y';
+}
+
+// Function to exit the game
+void exitGame() {
+    cout << "Exiting the game. Goodbye!" << endl;
+    exit(0);
 }
