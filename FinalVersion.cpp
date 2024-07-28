@@ -7,7 +7,7 @@
 using namespace std;
 
 /*
- File: Project2Final
+ File: Project2FinalVersion
  Name: Hanbal Yusuf
  Created: 7/27/2024
  Purpose: Blackjack Game
@@ -135,9 +135,11 @@ int main() {
     cout << "Player wins: " << playerWins << " (Average wins: " << playerAvgWins << ")" << endl;
     cout << "Dealer wins: " << dealerWins << " (Average wins: " << dealerAvgWins << ")" << endl;
 
-    // Calculate and display sine of wins
+    // Calculate and display sine and cosine of wins
     cout << "Player wins sin: " << sin(static_cast<float>(playerWins)) << endl;
+    cout << "Player wins cos: " << cos(static_cast<float>(playerWins)) << endl;
     cout << "Dealer wins sin: " << sin(static_cast<float>(dealerWins)) << endl;
+    cout << "Dealer wins cos: " << cos(static_cast<float>(dealerWins)) << endl;
 
     // Example of cmath usage
     cout << "Absolute value of player's final score: " << abs(finalPlayerScore) << endl;
@@ -187,7 +189,9 @@ void logGameDetails(ofstream &outfile, Card playerHand1, Card playerHand2, Card 
     outfile << "Dealer's hand: " << RANKS[dealerHand1.rank - 1] << dealerHand1.suit << " " << RANKS[dealerHand2.rank - 1] << dealerHand2.suit;
     outfile << " (Score: " << fixed << setprecision(2) << dealerScore << ")" << endl;
     outfile << "Player wins sin: " << sin(static_cast<float>(playerWins)) << endl;
+    outfile << "Player wins cos: " << cos(static_cast<float>(playerWins)) << endl;
     outfile << "Dealer wins sin: " << sin(static_cast<float>(dealerWins)) << endl;
+    outfile << "Dealer wins cos: " << cos(static_cast<float>(dealerWins)) << endl;
     outfile << "Total player wins: " << playerWins << endl;
     outfile << "Total dealer wins: " << dealerWins << endl;
 }
@@ -202,9 +206,11 @@ void logFinalResults(ofstream &outfile, int playerWins, int dealerWins) {
         outfile << "BOTH HAVE AN EQUAL AMOUNT OF WINS" << endl;
     }
     outfile << "Player wins sin: " << sin(static_cast<float>(playerWins)) << endl;
+    outfile << "Player wins cos: " << cos(static_cast<float>(playerWins)) << endl;
     outfile << "Dealer wins sin: " << sin(static_cast<float>(dealerWins)) << endl;
+    outfile << "Dealer wins cos: " << cos(static_cast<float>(dealerWins)) << endl;
 }
- 
+
 // Function to get valid input
 char getValidInput(string prompt) {
     char input;
